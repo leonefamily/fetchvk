@@ -13,6 +13,9 @@ Tested on Windows 10 and Raspberry Pi OS (Linux Debian) with Python 3.7.9 and 3.
 Проверено на Windows 10 и Raspberry Pi OS (Linux Debian) с версиями Python 3.7.9 и 3.9.1, но работать должно на всех платформах.
 
 ## How to install / Как установить
+
+![image](https://user-images.githubusercontent.com/77976599/156900698-6be6b300-b113-4b9e-8f8c-bb6067f6716a.png)
+
 ###### en
 You need to have Python 3 installed with pip (installed by default with Python). Download and extract the archive from this repository. Inside the directory with the unpacked archive call the command prompt (on Windows - hold Shift + RMB, "Open PowerShell here", on Linux or MacOS - if you have Linux, you know how to use the Terminal :laughing:), enter:
 ```
