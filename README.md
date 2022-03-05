@@ -5,12 +5,12 @@
 ###### en
 Download your data from VKontakte servers in order to keep all your photos and messages even after you delete your account.
 Currently only supports downloading of photos from albums without metadata, more features to come in the future.
-Tested on Windows 10 and Raspberry Pi OS (Linux Debian) with Python 3.7.9 and 3.9.1, will potentially work on all platforms.
+Tested on Windows 10 and Raspberry Pi OS (Linux Debian) with Python 3.7.9 and 3.9.2, will potentially work on all platforms.
 
 ###### ru
 Загрузите свои данные с серверов ВКонтакте, чтобы даже после удаления профиля иметь доступ к своим фотографиям и сообщениям.
 На данный момент поддерживается только загрузка фотографий (без метаданных - даты и места) из альбомов, другие функции появятся позже.
-Проверено на Windows 10 и Raspberry Pi OS (Linux Debian) с версиями Python 3.7.9 и 3.9.1, но работать должно на всех платформах.
+Проверено на Windows 10 и Raspberry Pi OS (Linux Debian) с версиями Python 3.7.9 и 3.9.2, но работать должно на всех платформах.
 
 ## How to install / Как установить
 
