@@ -15,7 +15,14 @@ STATUS = {
     'folder_num': 0,
     'file_num': 0,
     'item_num': 0,
-    'warns': '',
-    'errors': '',
-    'infos': ''
+    'warns': [],
+    'errors': [],
+    'info': [],
+    'verbose': True
+    }
+
+COLORS = {
+    'warns': 'orange',
+    'errors': 'red',
+    'info': 'black'
     }

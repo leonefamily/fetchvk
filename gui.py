@@ -10,7 +10,7 @@ import PySimpleGUI as sg
 import threading
 import logging
 
-from settings import STATUS
+from settings import STATUS, COLORS
 from utils import download_all
 
 
@@ -33,12 +33,25 @@ def update_info(window):
                 f'Current folder: {STATUS["current_folder"]}\n'
                 f'Current file: {STATUS["current_file"]}')
             )
+        if STATUS['verbose']:
+            color_print_info('info', window)
+        color_print_info('warns', window)
+        color_print_info('errors', window)
         STATUS['has_updates'] = False
+
+
+def color_print_info(key, window, max_len=30):
+    if len(STATUS[key]) > max_len:
+        sg.cprint(
+            f'........Omittied {len(STATUS[key]) - max_len} messages........',
+            text_color='orange')
+    sg.cprint('\n'.join(STATUS[key][-max_len:]), text_color=COLORS[key])
+    STATUS[key].clear()
 
 
 def main_thread(window, archive_path, save_path):
     download_all(archive_path, save_path)
-    window.write_event_value('-THREAD-', 'Everything done')
+    window.write_event_value('-THREAD-', '')
 
 
 def gui():
@@ -62,14 +75,16 @@ def gui():
          sg.PBar(1, size=(1, 10), expand_x=True, key='-ITEMS-')],
         [sg.T('', key='-INFO-')],
         [sg.HorizontalSeparator()],
-        [sg.Multiline(size=(5, 20), autoscroll=True, expand_x=True,
+        [sg.Multiline(size=(20, 10), autoscroll=True, expand_x=True,
                       key='-OUTPUT-')],
         [sg.HorizontalSeparator()],
         [sg.Button('Start', key='-START-'),
-         sg.Checkbox('Close when done', k='-E-', enable_events=True)]
+         sg.Checkbox('Close when done', k='-E-', enable_events=True),
+         sg.Checkbox('Verbose', k='-V-', enable_events=True, default=True)]
         ]
 
-    window = sg.Window('FetchVK', layout, icon='icon.ico')
+    window = sg.Window('fetchvk', layout, icon='icon.ico')
+    sg.cprint_set_output_destination(window, '-OUTPUT-')
 
     try:
         while True:
@@ -77,6 +92,8 @@ def gui():
             update_info(window)
             if event in (sg.WIN_CLOSED, 'Exit'):
                 break
+            elif event == '-V-':
+                STATUS['verbose'] = not STATUS['verbose']
             elif event == '-F-':
                 window['-APB-'].update(visible=not values[event])
                 window['-FPB-'].update(visible=values[event])
@@ -88,13 +105,14 @@ def gui():
                 archive_path = Path(values['-AP-'])
                 save_path = Path(values['-SP-'])
                 if archive_path.suffix != '.zip' and not values['-F-']:
-                    logging.info(f'{archive_path} is not a zip archive')
+                    STATUS['errors'].append(
+                        f'{archive_path} is not a zip archive')
                     continue
                 if not archive_path.exists():
-                    logging.info(f'{archive_path} does not exist')
+                    STATUS['errors'].append(f'{archive_path} does not exist')
                     continue
                 if not save_path.exists():
-                    logging.info(f'{save_path} does not exist')
+                    STATUS['errors'].append(f'{save_path} does not exist')
                     continue
                 mt = threading.Thread(target=main_thread,
                                       args=(window, archive_path, save_path,),
@@ -108,7 +126,7 @@ def gui():
                 window['-SPB-'].update(disabled=True)
                 window['-START-'].update(disabled=True)
             elif event == '-THREAD-':
-                logging.info(values[event])
+                sg.cprint('Everything is done!', text_color='green')
                 mt.join()
                 if values['-E-']:
                     break
@@ -120,8 +138,9 @@ def gui():
                     window['-APB-'].update(disabled=False)
                     window['-SPB-'].update(disabled=False)
                     window['-START-'].update(disabled=False)
-    except Exception as e:
-        logging.info(e)
+    except Exception:
+        import traceback
+        logging.info(traceback.format_exc())
     finally:
         window.close()
 

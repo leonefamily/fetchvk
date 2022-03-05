@@ -10,7 +10,6 @@ from urllib.parse import urlparse
 from zipfile import ZipFile
 from pathlib import Path
 import requests
-import logging
 import urllib
 import wget
 
@@ -19,6 +18,7 @@ from settings import STATUS
 
 def files_count(path):
     if not Path(path).is_dir():
+        STATUS['info'].append(f'{path} is not a directory')
         raise ValueError(f'{path} is not a directory')
     count = 0
     for f in Path(path).iterdir():
@@ -29,6 +29,7 @@ def files_count(path):
 
 def dirs_count(path):
     if not Path(path).is_dir():
+        STATUS['info'].append(f'{path} is not a directory')
         raise ValueError(f'{path} is not a directory')
     count = 0
     for f in Path(path).iterdir():
@@ -93,38 +94,40 @@ def download(url, pathname):
         try:
             try:
                 filename = url.split('/')[-1].split('?')[0]
-                # logging.info(f'{Path(pathname) / filename}')
                 if (Path(pathname) / filename).exists():
-                    logging.info(f'{filename} exists, skipping')
+                    STATUS['info'].append(f'{filename} exists, skipping')
                     return
-                else:
+                else:  # !!! TODO simplify
                     pass
             except Exception:
                 pass
             fname = wget.download(url, pathname)
-            logging.info(f'{fname} downloaded')
+            STATUS['info'].append(f'{fname} downloaded')
             break
         except (requests.HTTPError, urllib.error.HTTPError):
-            logging.info(
+            STATUS['warns'].append(
                 f'Error occured while downdloading, retry {tries}: {url}')
             if tries > 10:
-                logging.info(f'Download of {url} failed')
+                STATUS['errors'].append(f'Download of {url} failed')
                 break
         except Exception as e:
-            logging.error(f'{url}: {e}, {type(e)}')
+            STATUS['errors'].append(f'{url}: {e}, {type(e)}')
             break
 
 
 def download_all(archive_path, save_path):
-    logging.info(f'Reading and extracting {archive_path}...')
+    STATUS['info'].clear()
+    STATUS['warns'].clear()
+    STATUS['errors'].clear()
+    STATUS['info'].append(f'Reading and extracting {archive_path}...')
     if not Path(archive_path).is_dir():
         with ZipFile(archive_path, mode='r') as zf:
             zf.extractall(save_path)
         imgs_path = Path(save_path) / 'photos' / 'photo-albums'
     else:
         imgs_path = Path(archive_path) / 'photos' / 'photo-albums'
-    STATUS['folders_count'] += 1  # !!! TODO dirs_count
-    logging.info(f'Downloading images {imgs_path}...')
+    STATUS['folders_count'] = 1  # !!! TODO dirs_count
+    STATUS['info'].append(f'Downloading images {imgs_path}...')
     download_images(imgs_path, save_path)
     STATUS['has_updates'] += 1
     STATUS['folder_num'] += 1
