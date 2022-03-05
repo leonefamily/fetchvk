@@ -21,6 +21,7 @@ You need to have Python 3 installed with pip (installed by default with Python).
 ```
 python3 setup.py install
 ```
+On Windows, remove "3" from python.
 The required dependencies should be installed now. After that, the command prompt can be closed.
 
 ###### ru
@@ -28,6 +29,7 @@ The required dependencies should be installed now. After that, the command promp
 ```
 python3 setup.py install
 ```
+На Windows уберите "3" от python.
 Необходимые зависимости должны будут установиться. После этого командную строку можно будет закрыть.
 
 ## How to use / Как использовать

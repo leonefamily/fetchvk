@@ -5,7 +5,7 @@ Created on Sat Mar  5 21:06:52 2022
 @author: DGrishchuk
 """
 
-from distutils.core import setup
+from setuptools import setup
 
 
 with open('requirements.txt') as f:
