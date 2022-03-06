@@ -38,7 +38,7 @@ Go to page https://vk.com/data_protection?section=rules, scroll down to button "
 
 ![image](https://user-images.githubusercontent.com/77976599/156900448-abb44ed2-6adf-4acd-a473-df30fe9923cb.png)
 
-When done, double click "gui.py", enter path to the archive and to the folder you want to save data in. If the archive is already unpacked, check the checkbox "Archive is a folder" and enter path to unpacked archive location. If you'd like to see all text output from the script, keep "Verbose" checkbox checked, if unchecked, it will only show warnings and errors. If "Close when done" is checked, window will disappear after downloading is done.
+When done, double click "gui.pyw", enter path to the archive and to the folder you want to save data in. If the archive is already unpacked, check the checkbox "Archive is a folder" and enter path to unpacked archive location. If you'd like to see all text output from the script, keep "Verbose" checkbox checked, if unchecked, it will only show warnings and errors. If "Close when done" is checked, window will disappear after downloading is done.
 Should you encounter any errors, don't hesitate to contact me.
 
 ###### ru
@@ -46,5 +46,5 @@ Should you encounter any errors, don't hesitate to contact me.
 
 ![image](https://user-images.githubusercontent.com/77976599/156900236-3a1b6061-7765-41ce-bb60-9c27882ee4ae.png)
 
-После загрузки дважды щёлкните на "gui.py", введите путь к архиву и к папке, в которой вы хотите сохранить данные. Если архив уже распакован, установите флажок "Archive is a folder" и введите путь к месту расположения распакованного архива. Если вы хотите видеть весь текст, выводимый скриптом, выберите флажок "Verbose". Если он не выбран, будут отображаться только предупреждения и ошибки. Если выбран флажок "Close when done", окно исчезнет после завершения загрузки.
+После загрузки дважды щёлкните на "gui.pyw", введите путь к архиву и к папке, в которой вы хотите сохранить данные. Если архив уже распакован, установите флажок "Archive is a folder" и введите путь к месту расположения распакованного архива. Если вы хотите видеть весь текст, выводимый скриптом, выберите флажок "Verbose". Если он не выбран, будут отображаться только предупреждения и ошибки. Если выбран флажок "Close when done", окно исчезнет после завершения загрузки.
 Если встретятся какие-либо ошибки, напишите мне.

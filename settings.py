@@ -5,6 +5,8 @@ Created on Fri Mar  4 20:41:03 2022
 @author: DGrishchuk
 """
 
+from datetime import datetime as dt, timedelta as td
+
 STATUS = {
     'has_updates': False,
     'current_folder': '',
@@ -18,11 +20,24 @@ STATUS = {
     'warns': [],
     'errors': [],
     'info': [],
-    'verbose': True
+    'done': [],
+    'notice': [],
+    'verbose': True,
+    'username': None,
+    'password': None,
+    'last_update': dt.now(),
+    'ping_every': td(seconds=120),
+    'ping': True
     }
 
 COLORS = {
     'warns': 'orange',
     'errors': 'red',
-    'info': 'black'
+    'info': 'black',
+    'done': 'green',
+    'notice': 'gray',
     }
+
+DEFAULT_STATUS = {k: v for k, v in STATUS.items() if k not in ['verbose',
+                                                               'username',
+                                                               'password']}

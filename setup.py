@@ -13,7 +13,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='fetchvk',
-    version='0.1.0',
+    version='0.2.0',
     description='Download items from VK servers',
     author='Dmitrii Grishchuk',
     author_email='leonefamily@seznam.cz',
