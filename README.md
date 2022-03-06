@@ -1,6 +1,7 @@
 # fetchvk
 
-![dd](https://user-images.githubusercontent.com/77976599/156900383-cb11fe9f-5b66-43e4-a781-9fa5ec52162e.png)
+![image](https://user-images.githubusercontent.com/77976599/156941711-da8d8083-acf5-4200-a98a-36c377d85a7f.png)
+
 
 ###### en
 Download your data from VKontakte servers in order to keep all your photos and messages even after you delete your account.
