@@ -1,4 +1,5 @@
 beautifulsoup4
 PySimpleGUI
+youtube_dl
 requests
 wget
